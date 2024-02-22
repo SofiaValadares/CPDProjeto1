@@ -5,6 +5,9 @@
 #include <cstdlib>
 #include <papi.h>
 
+
+//g++ -O2 matrixproduct_resposta.cpp -o oi.exe -lpapi
+
 using namespace std;
 
 #define SYSTEMTIME clock_t
@@ -144,7 +147,7 @@ void OnMultBlock(int m_ar, int m_br, int bkSize)
     SYSTEMTIME Time1, Time2;
 	
 	char st[100];
-	int i, j, k;
+	int i, j, k, ib, jb, kb;
 
 	double *pha, *phb, *phc;
 	
