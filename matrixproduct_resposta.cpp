@@ -38,7 +38,7 @@ void OnMult(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+400);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -99,7 +99,7 @@ void OnMultLine(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+2048);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 

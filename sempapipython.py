@@ -7,7 +7,7 @@ def OnMult(m_ar, m_br):
 
     for i in range(m_br):
         for j in range(m_br):
-            phb[i*m_br + j] = i + 400.0
+            phb[i*m_br + j] = i + 1.0
 
     Time1 = time.time()
 
@@ -41,7 +41,7 @@ def OnMultLine(m_ar, m_br):
 
     for i in range(m_br):
         for j in range(m_br):
-            phb[i*m_br + j] = i + 400.0
+            phb[i*m_br + j] = i + 1.0
 
     Time1 = time.time()
     
