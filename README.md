@@ -7,7 +7,7 @@ Multiplication
 1800 | 17.918 seconds | 946.323 seconds
 2200 | 39.745 seconds | 1731.402 seconds
 2600 | 70.490 seconds | x seconds
-3000 | 118.942 seconds | X seconds
+3000 | 118.942 seconds | x seconds
 Line Multiplication 
 600 | 0.103 seconds | 43.061 seconds
 1000 | 0.492 seconds | 199.246 seconds
@@ -15,11 +15,11 @@ Line Multiplication
 1800 | 3.714 seconds | 1148.476 seconds
 2200 | 6.972 seconds | 2119.244 seconds
 2600 | 12.087 seconds | x seconds
-3000 | 17.878 seconds | X seconds
+3000 | 17.878 seconds | x seconds
 4096 | 48.913 seconds | |
 6144 | 164.480 seconds | |
 8192 | 411.651 seconds | |
-10240 | x seconds | |
+10240 | 792.512 seconds | |
 Block Multiplication 
 Block Size = 128
 4096 | 89.187 seconds | |
