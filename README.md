@@ -29,14 +29,13 @@ Block Size = 128
 Block Size = 256
 4096 | 91.182 seconds | |
 6144 | 300.610 seconds | |
-8192 | x seconds | |
+8192 | 3817.102 seconds | |
 10240 | 1407.182 seconds | |
 Block Size = 512
 4096 | 375.748 seconds | |
 6144 | 314.221 seconds | |
 8192 | x seconds | |
 10240 | x seconds | |
-
 
 
 # Performance Evaluation of a single and multi-core
@@ -50,13 +49,49 @@ De modo a recolher indicadores de performance relevantes, recorremos ao uso de P
 Na primeira parte do projeto, foi requisitado a implementação de diferentes versões do algoritmo de produto de duas matrizes. De modo a facilitar a leitura do relatório.
 Na primeira parte do projeto tivemos que implementar 3 diferentes versões de um algoritmos do produto de duas matrizes e realizar testes onde deveríamos registrar o tempo de processamento desse códigos.
 
-1. Multiplicação Linha x Coluna
-Tivemos que implementar essa versão em duas linguagens, uma em C/C++ e outra em uma linguagem escolhida pelo grupo, a linguagem selecionada foi o python
+**1. MULTIPLICAÇÃO LINHA X COLUNA** </br>
+Nessa versão multiplicamos cada linha da primeira matriz por uma coluna da segunda matriz (explicar isso melhor) </br>
+Ela foi implementada em duas liguagens, C++ e Python
+
+
+~~~C++
+    Time1 = clock();
+
+    for(i=0; i<m_ar; i++)
+      {	for( j=0; j<m_br; j++)
+        {	temp = 0;
+          for( k=0; k<m_ar; k++)
+          {	
+            temp += pha[i*m_ar+k] * phb[k*m_br+j];
+          }
+          phc[i*m_ar+j]=temp;
+        }
+      }
+
+    Time2 = clock();
+    sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
+    cout << st;
+~~~
+~~~Python
+    Time1 = time.time()
+
+    for i in range(m_ar):
+        for j in range(m_br):
+            temp = 0
+            for k in range(m_ar):
+                temp += pha[i*m_ar + k] * phb[k*m_br + j]
+            phc[i*m_ar + j] = temp
+
+    Time2 = time.time()
+    print(f"Time: {((Time2 - Time1)):.3f} seconds\n")
+~~~
+
+
 
 explicacao do algoritmo em c
 explicacao do algoritmo em python
 
-Assim foi realizados os teste bla ela
+Com esses dois codigos foram realizados testes afim de podemos observar e comparar a velocidade de processamento nas duas liguagens 
 
 MATRIZ | C | PYTHON |
 :---------: | :------: | :-------: |
@@ -68,13 +103,42 @@ MATRIZ | C | PYTHON |
 2600 | 70.490 seconds | x seconds
 3000 | 118.942 seconds | x seconds
 
-Foi observado que os testes realizados em C++ foram mais rápido e mais abobrinhas
+Foi observado que o tempo de processamento almenta conforme o tamanho da matriz. Fora isso também foi observado que a matriz sempre é mais rapidamente processada em C++ do que em python, esta diferença de tempo também fica maior quanto maior for a matriz.
 
-2. Multiplicação Linha X Linha
-Também foi implementado com as duas linguagens citadas acima e bla boa
+**2. MULTIPLICAÇÃO LINHA X LINHA** </br>
+Nessa vesão multipicamos cada linha de primeira matriz por cada linha da segunda matriz (explicar isso melhor) </br>
+Também foi implementada nas mesmas duas liguagens que a primeira versão
 
-explicacao do algoritmo em c
-explicacao do algoritmo em python
+~~~C++
+    Time1 = clock();
+	
+	for(i=0; i<m_ar; i++)
+	{
+		for(j=0; j<m_ar; j++)
+		{
+			for(k=0; k<m_br; k++)
+			{	
+				phc[i*m_ar+k] += pha[i*m_ar+k] * phb[j*m_ar+k];
+			}
+		}
+	}
+
+    Time2 = clock();
+    sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
+    cout << st;
+~~~
+~~~Python
+    Time1 = time.time()
+    
+    for i in range(m_ar):
+        for j in range(m_ar):
+            for k in range(m_br):
+                phc[i*m_ar + k] += pha[i*m_ar + k] * phb[j*m_ar + k]
+
+
+    Time2 = time.time()
+    print(f"Time: {((Time2 - Time1)):.3f} seconds\n")
+~~~
 
 Assim foi realizados os teste bla ela
 
@@ -99,8 +163,36 @@ MATRIZ | C |
 8192 | 411.651 seconds 
 10240 | 792.512 seconds 
 
-3. Multiplicação por bloco
+**3. MULTIPLICAÇÃO POR BLOCO** </br>
 Esse foi implementado somente em c++
+
+~~~C++
+    Time1 = clock();
+	
+	for (ib=0; ib<m_ar; ib+= bkSize) 
+	{
+		for (jb=0; jb<m_br; jb+=bkSize) 
+		{
+			for (kb=0; kb<m_ar; kb+=bkSize)
+			{
+				for(i=ib; i<min(ib+bkSize, m_ar); i++)
+				{	
+					for(j=jb; j<min(jb+bkSize, m_br); j++)
+					{	
+						for(k=kb; k<min(kb+bkSize, m_ar); k++)
+						{	
+							phc[i*m_ar+j] += pha[i*m_ar+k] * phb[k*m_br+j];
+						}
+					}
+				}
+			}
+		}
+	}
+
+    Time2 = clock();
+    sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
+    cout << st;
+~~~
 
 explicacao do algoritmo em c
 
@@ -115,7 +207,7 @@ Block Size = 128
 Block Size = 256
 4096 | 91.182 seconds 
 6144 | 300.610 seconds 
-8192 | x seconds 
+8192 | 3817.102 seconds 
 10240 | 1407.182 seconds 
 Block Size = 512
 4096 | 375.748 seconds 
@@ -125,3 +217,54 @@ Block Size = 512
 
 foi observado então abobrinhas 
 
+## Performance evaluation of a multi-core implementation
+Foi acrecentado paralelismo e tals, foi posto duas versões de paralelismo
+Implementado somente em C++
+
+
+
+### Produto de duas matrizes - Versão Python
+
+Escolhemos implementar o [algoritmo](/link) que foi concedido aos estudantes em [Python](). Após ter a implementação concluída, registamos os tempos de processamento indicados abaixo:
+
+#### EM C:
+
+//Inserir tabela
+
+#### EM Python:
+
+//Inserir tabela
+
+
+
+
+## 💻 Desenvolvedores:
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/gabrieltmjr">
+        <img src="https://avatars.githubusercontent.com/u/73040950?v=4" width="100px;" alt="Foto Matheus Gomes"/><br>
+        <sub>
+          <b>Gabriel Machado Jr</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/guiga-sa">
+        <img src="https://avatars.githubusercontent.com/u/123979639?v=4" width="100px;" alt="Foto Megas"/><br>
+        <sub>
+          <b>Guilherme Araujo</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/SofiaValadares">
+        <img src="https://avatars.githubusercontent.com/u/113111708?v=4" width="100px;" alt="Foto Sofia Valadares"/><br>
+        <sub>
+          <b>Sofia Valadares</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+<br></br>
