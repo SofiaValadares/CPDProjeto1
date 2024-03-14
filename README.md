@@ -14,7 +14,7 @@ Line Multiplication
 1400 | 1.637 seconds | 549.308 seconds
 1800 | 3.714 seconds | 1148.476 seconds
 2200 | 6.972 seconds | 2119.244 seconds
-2600 | 12.087 seconds | x seconds
+2600 | 12.087 seconds | 4070.254 seconds
 3000 | 17.878 seconds | x seconds
 4096 | 48.913 seconds | |
 6144 | 164.480 seconds | |
@@ -24,7 +24,7 @@ Block Multiplication
 Block Size = 128
 4096 | 89.187 seconds | |
 6144 | 305.734 seconds | |
-8192 | x seconds | |
+8192 | 723.451 seconds | |
 10240 | 1422.087 seconds | |
 Block Size = 256
 4096 | 91.182 seconds | |
@@ -32,7 +32,7 @@ Block Size = 256
 8192 | x seconds | |
 10240 | 1407.182 seconds | |
 Block Size = 512
-4096 | x seconds | |
+4096 | 375.748 seconds | |
 6144 | x seconds | |
 8192 | x seconds | |
 10240 | x seconds | |
