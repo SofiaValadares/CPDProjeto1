@@ -59,7 +59,7 @@ MATRIZ | C | PYTHON |
 1800 | 17.918 seconds | 946.323 seconds
 2200 | 39.745 seconds | 1731.402 seconds
 2600 | 70.490 seconds | x seconds
-3000 | 118.942 seconds | x seconds
+3000 | 118.942 seconds | 3502.117 seconds
 
 Essas implementações permitirão comparar o desempenho entre diferentes linguagens de programação na execução do mesmo algoritmo de multiplicação de matrizes.
 
