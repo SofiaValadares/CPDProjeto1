@@ -46,6 +46,8 @@ Foram implementadas 3 diferentes versões de um algoritmos do produto de duas ma
 ### **1. MULTIPLICAÇÃO LINHA X COLUNA** </br>
 Nesta abordagem, o algoritmo implementado multiplica uma linha da primeira matriz por cada coluna da segunda matriz. Esse algoritimo foi implenetado em C++ e Pyhton.
 
+Nesta implementação, temos três loops aninhados. O loop externo percorre as linhas da matriz resultante `phc`. Para cada linha, o segundo loop percorre as colunas da matriz resultante `phc`. Dentro desses loops, outro loop é utilizado para calcular cada elemento da matriz resultante, que é a soma dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`. A implementaçao nas duas linguagens segue uma mesma logica, o que pode mudar para cada uma é a sintax das liguagens. 
+
 **Implementação em C++:**
 ```cpp
 Time1 = clock();
@@ -105,6 +107,8 @@ Observa-se que o tempo de processamento aumenta conforme o tamanho da matriz, qu
 ### **2. MULTIPLICAÇÃO LINHA X LINHA**
 Nesta versão, realizamos a multiplicação de cada linha da primeira matriz por cada linha da segunda matriz. Isso significa que, em vez de multiplicar uma linha da primeira matriz por cada coluna da segunda matriz, como na versão anterior, multiplicamos cada linha da primeira matriz por cada linha da segunda matriz. Essa abordagem resulta em uma diferente estrutura de laços no código.
 
+Nesta implementação, são usados três loops aninhados. O primeiro loop `for(i)` itera sobre as linhas da matriz resultante `phc` e também representa as linhas da matriz 'pha'. Dentro deste loop, o segundo loop `for(j)` passa pelas linhas da matriz `phb`. Por fim, o terceiro loop `for(k)` itera sobre as linhas da matriz resultante `phc` e é utilizado para calcular cada elemento da matriz resultante `phc`. Dentro deste último loop, cada elemento `phc[i*m_ar + k]` é incrementado pelo produto dos elementos correspondentes das linhas da matriz `pha` e das linhas da matriz `phb`.
+
 **Implementação em C++:**
 ```cpp
 Time1 = clock();
@@ -124,7 +128,7 @@ Time2 = clock();
 sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 cout << st;
 ```
-Nesta implementação em C++, são usados três loops aninhados. O primeiro loop `for(i)` itera sobre as linhas da matriz resultante `phc`. Dentro deste loop, o segundo loop `for(j)` itera sobre as colunas da matriz resultante `phc`. Por fim, o terceiro loop `for(k)` é utilizado para calcular cada elemento da matriz resultante `phc`. Dentro deste último loop, cada elemento `phc[i*m_ar + k]` é incrementado pelo produto dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`.
+Nesta implementação em C++, são usados três loops aninhados. O primeiro loop `for(i)` itera sobre as linhas da matriz resultante `phc` e também representa as linhas da matriz 'pha'. Dentro deste loop, o segundo loop `for(j)` passa pelas linhas da matriz `phb`. Por fim, o terceiro loop `for(k)` itera sobre as linhas da matriz resultante `phc` e é utilizado para calcular cada elemento da matriz resultante `phc`. Dentro deste último loop, cada elemento `phc[i*m_ar + k]` é incrementado pelo produto dos elementos correspondentes das linhas da matriz `pha` e das linhas da matriz `phb`.
 
 **Implementação em Python:**
 ```python
@@ -173,12 +177,6 @@ Também foram realizados testes apenas em C para tamanhos de matriz maiores:
 
 Nesta abordagem, utilizamos o conceito de multiplicação por blocos para otimizar o desempenho da multiplicação de matrizes. Essa técnica envolve dividir as matrizes em blocos menores e realizar a multiplicação de cada bloco individualmente. Isso é feito para reduzir o número de acessos à memória e maximizar a eficiência do cache.
 
-O algoritmo implementado em C++ funciona da seguinte maneira:
-
-1. Dividimos as matrizes em blocos de tamanho `bkSize` (tamanho do bloco).
-2. Iteramos sobre os blocos da matriz de entrada, multiplicando os blocos correspondentes e acumulando o resultado na matriz de saída.
-3. Dentro de cada bloco, realizamos a multiplicação de matriz tradicional, mas limitada ao tamanho do bloco atual.
-
 ~~~C++
     Time1 = clock();
 	
@@ -206,6 +204,13 @@ O algoritmo implementado em C++ funciona da seguinte maneira:
     sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
     cout << st;
 ~~~
+
+O algoritmo implementado em C++ funciona da seguinte maneira:
+1. O loop externo `for (ib=0; ib<m_ar; ib+= bkSize)` percorre as linhas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das linhas. 
+2. Dentro deste loop, há outro loop `for (jb=0; jb<m_br; jb+=bkSize)` que percorre as colunas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das colunas.
+3. Em seguida, há um terceiro loop `for (kb=0; kb<m_ar; kb+=bkSize)` que percorre as linhas da matriz `pha` em blocos de tamanho `bkSize` na dimensão das linhas.
+4. Dentro desses três loops, há quatro loops aninhados para calcular os elementos de cada bloco da matriz resultante `phc`. Esses loops percorrem as linhas (`i`), as colunas (`j`) e as linhas da matriz `pha` (`k`) dentro dos blocos, limitados pelo tamanho do bloco e as dimensões das matrizes.
+5. Dentro do loop mais interno, o elemento `phc[i*m_ar+j]` é calculado como a soma acumulada dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`.
 
 Essa abordagem permite reduzir os acessos à memória e otimizar o uso do cache, resultando em um desempenho melhorado em comparação com os métodos tradicionais de multiplicação de matrizes.
 
