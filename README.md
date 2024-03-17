@@ -1,3 +1,5 @@
+Esse projeto foi desenvolvido na cadeira de Computação Paralela e Distributiva da FEUP, mestrada pelo professor Jorge Manuel Gomes Barbosa.
+
 # Performance Evaluation of a single and multi-core
 
 Este projeto teve como objetivo o **estudo da performance do processador na hierarquia de memória** ao aceder tamanhos de dados altos, usando o produto de duas matrizes.
@@ -6,10 +8,36 @@ Isso será feito através de duas partes distintas: na primeira parte, será ana
 
 A Performance API (PAPI) será utilizada para coletar indicadores de desempenho relevantes.
 
-**Turma 13 - Grupo 11:** 
-1. Gabriel Machado Jr (up202008860@fe.up.pt)
-2. Guilherme Araujo (up@202310879.up.pt)
-3. Sofia Valadares Cavalcanti (up202310878@up.pt)
+**Desenvolvedores:**
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/gabrieltmjr">
+        <img src="https://avatars.githubusercontent.com/u/73040950?v=4" width="100px;" alt="Foto Gabriel"/><br>
+        <sub>
+          <b>Gabriel Machado Jr</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/guiga-sa">
+        <img src="https://avatars.githubusercontent.com/u/123979639?v=4" width="100px;" alt="Foto Guilherme"/><br>
+        <sub>
+          <b>Guilherme Araujo</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/SofiaValadares">
+        <img src="https://avatars.githubusercontent.com/u/113111708?v=4" width="100px;" alt="Foto Sofia Valadares"/><br>
+        <sub>
+          <b>Sofia Valadares</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+<br></br>
 
 ## Performance Evaluation of a single core
 Na primeira parte do projeto, foi requisitado a implementação de diferentes versões do algoritmo de produto de duas matrizes. O algoritmo para multiplicação linha por coluna em C++ e pudemos escolher outra linguagem para usar e implementar o mesmo algoritmo de modo a comparar a execução. O algoritmo linha por linha e por bloco foi feito pelo grupo.
