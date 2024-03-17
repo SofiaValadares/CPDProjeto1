@@ -135,7 +135,7 @@ void OnMultLine(int m_ar, int m_br)
 
     cout << "MFlops: " << MFlops << endl;
 
-    // Medição do tempo para a versão sequencial
+    Time1 = clock();
     for(i = 0; i < m_ar; i++)
     {
         for(j = 0; j < m_ar; j++)
@@ -146,19 +146,15 @@ void OnMultLine(int m_ar, int m_br)
             }
         }
     }
+    Time2 = clock();
+    double sequential_time = (double)(Time2 - Time1) / CLOCKS_PER_SEC;
+
 
     // Cálculo da aceleração (speedup)
     double speedup = sequential_time / elapsed_time;
 
     cout << "Speedup: " << speedup << endl;
 
-    // Número de threads utilizadas no paralelismo
-    int num_threads = omp_get_max_threads();
-
-    // Cálculo da eficiência
-    double efficiency = speedup / num_threads;
-
-    cout << "Efficiency: " << efficiency << endl;
 
 	// display 10 elements of the result matrix tto verify correctness
 	cout << "Result matrix: " << endl;
