@@ -1,6 +1,6 @@
 # Performance Evaluation of a single and multi-core
 
-Este projeto teve como objetivo o **ezes como objeto de estudo.studo da performance do processador na hierarquia de memória** ao aceder tamanhos de dados altos, usando o produto de duas matrizes.
+Este projeto teve como objetivo o **ezes como objeto de estudo da performance do processador na hierarquia de memória** ao aceder tamanhos de dados altos, usando o produto de duas matrizes.
 
 Isso será feito através de duas partes distintas: na primeira parte, será analisado o impacto da hierarquia de memória em um único núcleo de processamento, enquanto na segunda parte, serão investigadas implementações paralelas em sistemas multi-core. 
 
@@ -274,23 +274,23 @@ Em resumo, enquanto o primeiro algoritmo paraleliza apenas o loop externo, distr
 
 Foram realizados testes nos dois algoritimos onde o tempo de processamento é registrado para matrizes de entrada variando de 600x600 a 3000x3000 elementos, com incrementos de 400 em ambas as dimensões.
 
-| Tamanho da Matriz | Algoritimo 1 (segundos) | Algoritimo 2 (segundos) | Multipicação Linha X Linha |
+| Tamanho da Matriz | Algoritimo 1 (segundos) | Algoritimo 2 (segundos) | Multipicação Linha X Linha (segundos) |
 |:------------------:|:---------------:|:-----------------:|:-----------------:|
 | 4096               | 289.806         | x                 | 286.583           |
 | 6144               | 489.075         | x                 | x                 |
 | 8192               | x               | x                 | x                 |
 | 10240              | x               | x                 | x                 |
 
-<sub>Observação: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente (macOS), e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento. Por isso mesmo que também refizemos os testes da multiplicação linha x linha sem paramerilização sem a flag, para assim ser possivel comprarar os testes de maneira mais fidedigna.</sup>
+<sub>Observação: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente (macOS), e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento. Por isso mesmo que também refizemos os testes da multiplicação linha x linha sequencial sem a flag, para assim ser possivel comprarar os testes de maneira mais fidedigna.</sup>
 
 Também coletamos as informações sobre os MFlops e o speedup dos algoritimos
 
 | Tamanho da Matriz | Algoritimo 1 (MFlops) | Algoritimo 1 (Speedup) | Algoritimo 2 (MFlops) | Algoritimo 2 (Speedup) |
 |:------------------:|:---------------:|:-----------------:|:---------------:|:-----------------:|
-| 4096               | 0               | 0.98888           | 43.061            | 0.98147           |
-| 6144               | 0               | 0.995958          | 43.061            | 0.981473          |
-| 8192               | 1.637           | 0.981473          | 43.061            | 0.981473          |
-| 10240              | 3.714           | 0.981473          | 43.061            | 43.061            |
+| 4096               | 0               | 0.98888           | x                 | x                 |
+| 6144               | 0               | 0.995958          | x                 | x                 |
+| 8192               | x               | x                 | x                 | x                 |
+| 10240              | x               | x                 | x                 | x                 |
 
 COm isso concluimos tals e baus
 
