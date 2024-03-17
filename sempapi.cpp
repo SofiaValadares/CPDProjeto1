@@ -34,7 +34,7 @@ void OnMult(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+1);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -85,7 +85,9 @@ void OnMultLine(int m_ar, int m_br)
 	int i, j, k;
 
 	double *pha, *phb, *phc;
+	double num_operations = m_ar * m_ar * m_br * 2;
 	
+	cout << "num_operations: " << num_operations << endl;
 
 		
     pha = (double *)malloc((m_ar * m_ar) * sizeof(double));
@@ -100,7 +102,7 @@ void OnMultLine(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+2048);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -113,7 +115,7 @@ void OnMultLine(int m_ar, int m_br)
     Time1 = clock();
 	#pragma omp parallel for
 	for(i=0; i<m_ar; i++)
-	{
+	{	
 		for(j=0; j<m_ar; j++)
 		{
 			for(k=0; k<m_br; k++)
@@ -130,10 +132,15 @@ void OnMultLine(int m_ar, int m_br)
 
 	// Cálculo de MFlops
     double elapsed_time = (double)(Time2 - Time1) / CLOCKS_PER_SEC;
-    double num_operations = m_ar * m_ar * m_br * 2; // Multiplicações e somas
+     // Multiplicações e somas
     double MFlops = (num_operations / (elapsed_time * 1e6)); // Convertendo para milhões
 
+	//cout << "num_operations: " << num_operations << endl;
     cout << "MFlops: " << MFlops << endl;
+
+	for(i=0; i<m_ar; i++)
+		for(j=0; j<m_br; j++)
+			phc[i*m_ar + j] = (double)0.0;
 
     Time1 = clock();
     for(i = 0; i < m_ar; i++)
@@ -149,7 +156,6 @@ void OnMultLine(int m_ar, int m_br)
     Time2 = clock();
     double sequential_time = (double)(Time2 - Time1) / CLOCKS_PER_SEC;
 
-
     // Cálculo da aceleração (speedup)
     double speedup = sequential_time / elapsed_time;
 
@@ -163,6 +169,56 @@ void OnMultLine(int m_ar, int m_br)
 			cout << phc[j] << " ";
 	}
 	cout << endl;
+
+	cout << "sequential_time: " << sequential_time << endl;
+
+
+	cout << "\n\n\n\n1. Multiplication" << endl;
+	cout << "2. Line Multiplication" << endl;
+	cout << "3. Block Multiplication" << endl;
+	cout << "Selection?: 2" << endl;
+	cout << "Dimensions: lins=cols ? " << m_ar << endl;
+
+	for(i=0; i<m_ar; i++)
+		for(j=0; j<m_br; j++)
+			phc[i*m_ar + j] = (double)0.0;
+
+	Time1 = clock();
+	#pragma omp parallel
+	for(i=0; i<m_ar; i++)
+	{
+		for(j=0; j<m_ar; j++)
+		{
+			#pragma omp for
+			for(k=0; k<m_br; k++)
+			{	
+				phc[i*m_ar+k] += pha[i*m_ar+k] * phb[j*m_ar+k];
+			}
+		}
+	}
+    Time2 = clock();
+	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
+	cout << st;
+
+	// Cálculo de MFlops
+    elapsed_time = (double)(Time2 - Time1) / CLOCKS_PER_SEC;
+    num_operations = m_ar * m_ar * m_br * 2; // Multiplicações e somas
+    MFlops = (num_operations / (elapsed_time * 1e6)); // Convertendo para milhões
+
+    cout << "MFlops: " << MFlops << endl;
+
+	speedup = sequential_time / elapsed_time;
+
+    cout << "Speedup: " << speedup << endl;
+
+	cout << "Result matrix: " << endl;
+	for(i=0; i<1; i++)
+	{	for(j=0; j<min(10,m_br); j++)
+			cout << phc[j] << " ";
+	}
+	cout << endl;
+
+	cout << "sequential_time: " << sequential_time << endl;
 
     free(pha);
     free(phb);

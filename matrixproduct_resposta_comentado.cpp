@@ -39,7 +39,7 @@ void OnMult(int m_ar, int m_br)
 	// Preenche a matriz phb
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+400);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 	// Pega momento que iniciou a processar
@@ -107,7 +107,7 @@ void OnMultLine(int m_ar, int m_br)
 	// Preence a matriz phb
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+2048);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 	// Preence a matriz phc com 0 para evitar memory lik

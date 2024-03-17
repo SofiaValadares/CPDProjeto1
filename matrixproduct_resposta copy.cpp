@@ -38,7 +38,7 @@ void OnMult(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+400);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -99,7 +99,7 @@ void OnMultLine(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+2048);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -163,7 +163,7 @@ void OnMultLineParallel1(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+2048);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -227,7 +227,7 @@ void OnMultLineParallel2(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+2048);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -296,7 +296,7 @@ void OnMultBlock(int m_ar, int m_br, int bkSize)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+1);
+			phb[i*m_br + j] = (double)(i+1.0);
 
 
 
@@ -403,6 +403,8 @@ int main (int argc, char *argv[])
 		cout << endl << "1. Multiplication" << endl;
 		cout << "2. Line Multiplication" << endl;
 		cout << "3. Block Multiplication" << endl;
+		cout << "4. Line Multiplication Parallel 1" << endl;
+		cout << "5. Line Multiplication Parallel 2" << endl;
 		cout << "Selection?: ";
 		cin >>op;
 		if (op == 0)
@@ -427,6 +429,12 @@ int main (int argc, char *argv[])
 				cout << "Block Size? ";
 				cin >> blockSize;
 				OnMultBlock(lin, col, blockSize);  
+				break;
+			case 4:
+				OnMultLineParallel1(lin, col);  
+				break;
+			case 5:
+				OnMultLineParallel2(lin, col);  
 				break;
 
 		}
