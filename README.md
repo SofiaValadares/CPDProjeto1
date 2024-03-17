@@ -1,6 +1,6 @@
 # Performance Evaluation of a single and multi-core
 
-Este projeto teve como objetivo o **estudo da performance do processador na hierarquia de memória** ao aceder tamanhos de dados altos, usando o produto de duas matrizes como objeto de estudo.
+Este projeto teve como objetivo o **ezes como objeto de estudo.studo da performance do processador na hierarquia de memória** ao aceder tamanhos de dados altos, usando o produto de duas matrizes.
 
 Isso será feito através de duas partes distintas: na primeira parte, será analisado o impacto da hierarquia de memória em um único núcleo de processamento, enquanto na segunda parte, serão investigadas implementações paralelas em sistemas multi-core. 
 
@@ -43,16 +43,12 @@ A Performance API (PAPI) será utilizada para coletar indicadores de desempenho 
 <br></br>
 
 ## Performance Evaluation of a single core
-Na primeira parte do projeto, foi requisitado a implementação de diferentes versões do algoritmo de produto de duas matrizes. De modo a facilitar a leitura do relatório.(Essa parte precisa?)
-
-Nesta parte do projeto, será realizada uma avaliação de desempenho de um único núcleo de processamento. O foco será entender como a hierarquia de memória impacta o desempenho ao acessar grandes volumes de dados, utilizando a multiplicação de matrizes como exemplo. Para foi requisitado a implementação de diferentes versões do algoritmo de produto de duas matrizes, nas liguagens C++ e Python.
-
-Foram implementadas 3 diferentes versões de um algoritmos do produto de duas matrizes, ultilizando de duas diferentes liguagens, C++ e Python.
+Na primeira parte do projeto, foi requisitado a implementação de diferentes versões do algoritmo de produto de duas matrizes. De modo a facilitar a leitura do relatório.
 
 ### **1. MULTIPLICAÇÃO LINHA X COLUNA** </br>
 Nesta abordagem, o algoritmo implementado multiplica uma linha da primeira matriz por cada coluna da segunda matriz. Esse algoritimo foi implenetado em C++ e Pyhton.
 
-Nesta implementação, temos três loops aninhados. O loop externo percorre as linhas da matriz resultante `phc`. Para cada linha, o segundo loop percorre as colunas da matriz resultante `phc`. Dentro desses loops, outro loop é utilizado para calcular cada elemento da matriz resultante, que é a soma dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`. A implementaçao nas duas linguagens segue uma mesma logica, o que pode mudar para cada uma é a sintax das liguagens. 
+Nesta implementação, temos três loops aninhados. O loop externo `for (i)` percorre as linhas da matriz resultante `phc`. Para cada linha, o segundo loop `for (j)` percorre as colunas da matriz resultante `phc`. Dentro desses loops, outro loop `for (k)` é utilizado para calcular cada elemento da matriz resultante, que é a soma dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`. A implementaçao nas duas linguagens segue uma mesma logica, o que pode mudar para cada uma é a sintaxe das liguagens. 
 
 **Implementação em C++:**
 ```cpp
@@ -75,8 +71,6 @@ Time2 = clock();
 sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 cout << st;
 ```
-Nesta implementação em C++, temos três loops aninhados. O loop externo percorre as linhas da matriz resultante `phc`. Para cada linha, o segundo loop percorre as colunas da matriz resultante `phc`. Dentro desses loops, outro loop é utilizado para calcular cada elemento da matriz resultante, que é a soma dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`.
-
 **Implementação em Python:**
 ```python
 Time1 = time.time()
@@ -91,9 +85,6 @@ for i in range(m_ar):
 Time2 = time.time()
 print(f"Time: {((Time2 - Time1)):.3f} seconds\n")
 ```
-A implementação em Python segue uma lógica semelhante à implementação em C++, mas usando a sintaxe e estruturas de controle específicas do Python. Aqui, também temos três loops aninhados. O primeiro loop `for i` percorre as linhas da matriz resultante `phc`, o segundo loop `for j` percorre as colunas da matriz resultante `phc`, e o terceiro loop `for k` calcula cada elemento da matriz resultante, semelhante à lógica da implementação em C++.
-
-O tempo de processamento é registrado para matrizes de entrada variando de 600x600 a 3000x3000 elementos, com incrementos de 400 em ambas as dimensões, em ambas as linguagens. No compilador C++, a flag de otimização -O2 é utilizada para garantir uma compilação otimizada.
 
 Foram realizados testes onde o tempo de processamento é registrado para matrizes de entrada variando de 600x600 a 3000x3000 elementos, com incrementos de 400 em ambas as dimensões, em ambas as linguagens. 
 
@@ -107,7 +98,7 @@ Foram realizados testes onde o tempo de processamento é registrado para matrize
 | 1800               | 17.918          | 946.323           |
 | 2200               | 39.745          | 1731.402          |
 | 2600               | 70.490          | x                 |
-| 3000               | 118.942         | 3502.117 <sup>*1 </sup>      |
+| 3000               | 118.942         | 3502.117 <sup>*1</sup>      |
 
 
 <sup>Observação *1: Esse texte foi feito em uma maquina diferente devido a indisponibilidade de tempo e maquinas no momento do trabalho.</sup>
@@ -115,7 +106,7 @@ Foram realizados testes onde o tempo de processamento é registrado para matrize
 Observa-se que o tempo de processamento aumenta conforme o tamanho da matriz, quando em valores maiores, mesmo que esse almento tenha o mesmo valor, o almento de tempo é maior. Além disso, é notável que a implementação em C++ é significativamente mais rápida do que a implementação em Python, e essa diferença de desempenho aumenta à medida que o tamanho da matriz aumenta. Essas análises fornecem insights valiosos sobre o desempenho relativo das duas linguagens na execução do mesmo algoritmo de multiplicação de matrizes.
 
 ### **2. MULTIPLICAÇÃO LINHA X LINHA**
-Nesta versão, realizamos a multiplicação de cada linha da primeira matriz por cada linha da segunda matriz. Isso significa que, em vez de multiplicar uma linha da primeira matriz por cada coluna da segunda matriz, como na versão anterior, multiplicamos cada linha da primeira matriz por cada linha da segunda matriz. Essa abordagem resulta em uma diferente estrutura de laços no código.
+Nesta versão, realizamos a multiplicação de cada linha da primeira matriz por cada linha da segunda matriz. Ela foi implementada em C++ e em Python.
 
 Nesta implementação, são usados três loops aninhados. O primeiro loop `for(i)` itera sobre as linhas da matriz resultante `phc` e também representa as linhas da matriz 'pha'. Dentro deste loop, o segundo loop `for(j)` passa pelas linhas da matriz `phb`. Por fim, o terceiro loop `for(k)` itera sobre as linhas da matriz resultante `phc` e é utilizado para calcular cada elemento da matriz resultante `phc`. Dentro deste último loop, cada elemento `phc[i*m_ar + k]` é incrementado pelo produto dos elementos correspondentes das linhas da matriz `pha` e das linhas da matriz `phb`.
 
@@ -138,8 +129,6 @@ Time2 = clock();
 sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 cout << st;
 ```
-Nesta implementação em C++, são usados três loops aninhados. O primeiro loop `for(i)` itera sobre as linhas da matriz resultante `phc` e também representa as linhas da matriz 'pha'. Dentro deste loop, o segundo loop `for(j)` passa pelas linhas da matriz `phb`. Por fim, o terceiro loop `for(k)` itera sobre as linhas da matriz resultante `phc` e é utilizado para calcular cada elemento da matriz resultante `phc`. Dentro deste último loop, cada elemento `phc[i*m_ar + k]` é incrementado pelo produto dos elementos correspondentes das linhas da matriz `pha` e das linhas da matriz `phb`.
-
 **Implementação em Python:**
 ```python
 Time1 = time.time()
@@ -152,10 +141,8 @@ for i in range(m_ar):
 Time2 = time.time()
 print(f"Time: {((Time2 - Time1)):.3f} seconds\n")
 ```
-A implementação em Python segue uma lógica semelhante à implementação em C++, usando loops `for` aninhados para percorrer as linhas e colunas da matriz resultante `phc`. O loop `for i in range(m_ar)` percorre as linhas da matriz resultante, o loop `for j in range(m_ar)` percorre as colunas, e o loop `for k in range(m_br)` é utilizado para calcular cada elemento da matriz resultante. Dentro deste último loop, cada elemento `phc[i*m_ar + k]` é incrementado pelo produto dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`.
 
 Foram realizados testes onde o tempo de processamento é registrado para matrizes de entrada variando de 600x600 a 3000x3000 elementos, com incrementos de 400 em ambas as dimensões, em ambas as linguagens. 
-
 
 | Tamanho da Matriz | C++ (segundos) | Python (segundos) |
 |:------------------:|:---------------:|:-----------------:|
@@ -165,13 +152,11 @@ Foram realizados testes onde o tempo de processamento é registrado para matrize
 | 1800               | 3.714           | 1148.476          |
 | 2200               | 6.972           | 2119.244          |
 | 2600               | 12.087          | 4070.254          |
-| 3000               | 17.878          | 3309.937 <sup>*1 </sup> |
+| 3000               | 17.878          | 3309.937 <sup>*1</sup> |
 
 <sup>Observação *1: Este teste foi realizado em uma máquina diferente devido à indisponibilidade de tempo e máquinas no momento do trabalho.</sup>
 
-<sup> Foi observado que o tempo de processamento aumenta conforme o tamanho da matriz. Além disso, assim como na versão anterior, a implementação em C++ apresenta um desempenho significativamente melhor em relação à implementação em Python, com a diferença de desempenho tornando-se mais pronunciada à medida que o tamanho da matriz aumenta</sup>
-
-Foi obserevadp tudo aquilo que foi observado na versão anterior (1. MULTIPLICAÇÃO LINHA X COLUNA), mais também com a adiçao que o algoritimo em C++ se mostrou mais rapido e com menor almento de tempo conforme a matriz almentava, ao contrario dos testes em Python que se mostraram mais lentos em coparaçao ao primeiro algotitimo (a exeçao do teste 3000 que ambos foram relalizados em outra maquina e nesse caso o segundo algoritimo se provou ligeiramente mais rapido).
+Foi obserevado tudo aquilo que foi observado na versão anterior (1. MULTIPLICAÇÃO LINHA X COLUNA), mais também com a adiçao que o algoritimo em C++ se mostrou mais rapido e com menor almento de tempo conforme a matriz almentava, ao contrario dos testes em Python que se mostraram mais lentos em coparaçao a multiplicação linha x coluno (a exeçao do teste 3000 que ambos foram relalizados em outra maquina e nesse caso o segundo algoritimo se provou ligeiramente mais rapido).
 
 Também foram realizados testes com valores maiores variando de 4096x4096 a 10240x10240 elementos, com incrementos de 2048 em ambas as dimensões, somete na liguagem C++.
 
@@ -182,11 +167,14 @@ Também foram realizados testes com valores maiores variando de 4096x4096 a 1024
 | 8192               | 411.651      |
 | 10240              | 792.512      |
 
-<sup>Oque agente observa aqui?????: Nesses testes podemos ver a real eficiencia do segundo algoritimo em C++ em relaçao ao primeiro, devido aos primeiros teste se mostrar com menor tempo que aos dois ultimos testes do primeiro algoritimo, e também em relação ao de Python, já que mesmo com numeros maiores o tempo de processamento se mostra inferior a varios testes realizados no algoritimo de python</sup>
+Nesses testes podemos ver a real eficiencia do segundo algoritimo em C++ em relaçao ao primeiro, devido aos primeiros teste se mostrar com menor tempo que aos dois ultimos testes do primeiro algoritimo, e também em relação ao de Python, já que mesmo com numeros maiores o tempo de processamento se mostra inferior a varios testes realizados no algoritimo de Python.
 
 ### **3. MULTIPLICAÇÃO POR BLOCO**
-Nesta abordagem, utilizamos o conceito de multiplicação por blocos para otimizar o desempenho da multiplicação de matrizes. Essa técnica envolve dividir as matrizes em blocos menores e realizar a multiplicação de cada bloco individualmente. Isso é feito para reduzir o número de acessos à memória e maximizar a eficiência do cache.
+Nesta abordagem, utilizamos o conceito de multiplicação por blocos para otimizar o desempenho da multiplicação de matrizes. 
 Essa parte foi desenvolvida somente em C++
+
+O algoritmo implementado em C++ funciona da seguinte maneira:
+O loop externo `for(ib)` percorre as linhas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das linhas. Dentro deste loop, há outro loop `for(jb)` que percorre as colunas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das colunas. Em seguida, há um terceiro loop `for(kb)` que percorre as linhas da matriz `pha` em blocos de tamanho `bkSize` na dimensão das linhas. Dentro desses três loops, há tres loops aninhados para calcular os elementos de cada bloco da matriz resultante `phc`. Esses loops percorrem as linhas (`for(i)`), as colunas (`for(j)`) e as linhas da matriz `pha` (`for(k)`) dentro dos blocos, limitados pelo tamanho do bloco e as dimensões das matrizes. Dentro do loop mais interno, o elemento `phc[i*m_ar+j]` é calculado como a soma acumulada dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`.
 
 ~~~C++
     Time1 = clock();
@@ -215,13 +203,6 @@ Essa parte foi desenvolvida somente em C++
     sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
     cout << st;
 ~~~
-
-O algoritmo implementado em C++ funciona da seguinte maneira:
-1. O loop externo `for (ib=0; ib<m_ar; ib+= bkSize)` percorre as linhas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das linhas. 
-2. Dentro deste loop, há outro loop `for (jb=0; jb<m_br; jb+=bkSize)` que percorre as colunas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das colunas.
-3. Em seguida, há um terceiro loop `for (kb=0; kb<m_ar; kb+=bkSize)` que percorre as linhas da matriz `pha` em blocos de tamanho `bkSize` na dimensão das linhas.
-4. Dentro desses três loops, há quatro loops aninhados para calcular os elementos de cada bloco da matriz resultante `phc`. Esses loops percorrem as linhas (`i`), as colunas (`j`) e as linhas da matriz `pha` (`k`) dentro dos blocos, limitados pelo tamanho do bloco e as dimensões das matrizes.
-5. Dentro do loop mais interno, o elemento `phc[i*m_ar+j]` é calculado como a soma acumulada dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`.
 
 Essa abordagem permite reduzir os acessos à memória e otimizar o uso do cache, resultando em um desempenho melhorado em comparação com os métodos tradicionais de multiplicação de matrizes.
 
