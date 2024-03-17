@@ -79,11 +79,9 @@ void OnMult(int m_ar, int m_br)
 // add code here for line x line matriz multiplication
 void OnMultLine(int m_ar, int m_br)
 {
-    	
-	SYSTEMTIME Time1, Time2;
+    SYSTEMTIME Time1, Time2;
 	
 	char st[100];
-	double temp;
 	int i, j, k;
 
 	double *pha, *phb, *phc;
@@ -102,35 +100,65 @@ void OnMultLine(int m_ar, int m_br)
 
 	for(i=0; i<m_br; i++)
 		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(i+1);
+			phb[i*m_br + j] = (double)(i+2048);
+
+
+
+	for(i=0; i<m_ar; i++)
+		for(j=0; j<m_br; j++)
+			phc[i*m_ar + j] = (double)0.0;
 
 
 
     Time1 = clock();
-
+	#pragma omp parallel for
 	for(i=0; i<m_ar; i++)
 	{
-		for( j=0; j<m_ar; j++)
-		{	//temp = 0;
-			for( k=0; k<m_br; k++)
+		for(j=0; j<m_ar; j++)
+		{
+			for(k=0; k<m_br; k++)
 			{	
-				//temp = 0;
-				phc[i*m_ar+k] += pha[i*m_ar+k] * phb[j*m_br+k];
-				//phc[i*m_ar+k]+=temp;
-				//printf("%f ", temp);
+				phc[i*m_ar+k] += pha[i*m_ar+k] * phb[j*m_ar+k];
 			}
-			//printf("%f ", temp);
-			//printf("\n");
-			//phc[i*m_ar+j]=temp;
-
 		}
-		printf("\n");
 	}
 
 
     Time2 = clock();
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
+
+	// Cálculo de MFlops
+    double elapsed_time = (double)(Time2 - Time1) / CLOCKS_PER_SEC;
+    double num_operations = m_ar * m_ar * m_br * 2; // Multiplicações e somas
+    double MFlops = (num_operations / (elapsed_time * 1e6)); // Convertendo para milhões
+
+    cout << "MFlops: " << MFlops << endl;
+
+    // Medição do tempo para a versão sequencial
+    for(i = 0; i < m_ar; i++)
+    {
+        for(j = 0; j < m_ar; j++)
+        {
+            for(k = 0; k < m_br; k++)
+            {   
+                phc[i * m_ar + k] += pha[i * m_ar + k] * phb[j * m_ar + k];
+            }
+        }
+    }
+
+    // Cálculo da aceleração (speedup)
+    double speedup = sequential_time / elapsed_time;
+
+    cout << "Speedup: " << speedup << endl;
+
+    // Número de threads utilizadas no paralelismo
+    int num_threads = omp_get_max_threads();
+
+    // Cálculo da eficiência
+    double efficiency = speedup / num_threads;
+
+    cout << "Efficiency: " << efficiency << endl;
 
 	// display 10 elements of the result matrix tto verify correctness
 	cout << "Result matrix: " << endl;
@@ -143,10 +171,9 @@ void OnMultLine(int m_ar, int m_br)
     free(pha);
     free(phb);
     free(phc);
-	
-	
     
 }
+
 
 // add code here for block x block matriz multiplication
 void OnMultBlock(int m_ar, int m_br, int bkSize)
