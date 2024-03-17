@@ -97,11 +97,11 @@ Foram realizados testes onde o tempo de processamento é registrado para matrize
 | 1400               | 3.369           | 439.760           |
 | 1800               | 17.918          | 946.323           |
 | 2200               | 39.745          | 1731.402          |
-| 2600               | 70.490          | x                 |
+| 2600               | 70.490          | x <sup>*1</sup>             |
 | 3000               | 118.942         | 3502.117 <sup>*1</sup>      |
 
 
-<sup>Observação *1: Esse texte foi feito em uma maquina diferente devido a indisponibilidade de tempo e maquinas no momento do trabalho.</sup>
+<sup>Observação *1: Esse texte foi feito em uma maquina diferente, com um sistema operacional diferente, devido a indisponibilidade de tempo e maquinas no momento.</sup>
 
 Observa-se que o tempo de processamento aumenta conforme o tamanho da matriz, quando em valores maiores, mesmo que esse almento tenha o mesmo valor, o almento de tempo é maior. Além disso, é notável que a implementação em C++ é significativamente mais rápida do que a implementação em Python, e essa diferença de desempenho aumenta à medida que o tamanho da matriz aumenta. Essas análises fornecem insights valiosos sobre o desempenho relativo das duas linguagens na execução do mesmo algoritmo de multiplicação de matrizes.
 
@@ -154,9 +154,9 @@ Foram realizados testes onde o tempo de processamento é registrado para matrize
 | 2600               | 12.087          | 4070.254          |
 | 3000               | 17.878          | 3309.937 <sup>*1</sup> |
 
-<sup>Observação *1: Este teste foi realizado em uma máquina diferente devido à indisponibilidade de tempo e máquinas no momento do trabalho.</sup>
+<sup>Observação *1: Este teste foi realizado em uma máquina diferente, com um sistema operacional diferente, devido à indisponibilidade de tempo e máquinas no momento.</sup>
 
-Foi obserevado tudo aquilo que foi observado na versão anterior (1. MULTIPLICAÇÃO LINHA X COLUNA), mais também com a adiçao que o algoritimo em C++ se mostrou mais rapido e com menor almento de tempo conforme a matriz almentava, ao contrario dos testes em Python que se mostraram mais lentos em coparaçao a multiplicação linha x coluno (a exeçao do teste 3000 que ambos foram relalizados em outra maquina e nesse caso o segundo algoritimo se provou ligeiramente mais rapido).
+Foi obserevado tudo aquilo que foi observado na versão do algoritimo de multiplição linha x coluna, mais também com a adiçao que o algoritimo em C++ se mostrou mais rapido e com menor almento de tempo conforme a matriz almentava, ao contrario dos testes em Python que se mostraram mais lentos em coparaçao a multiplicação linha x coluna (a exeçao do teste 3000 que ambos foram relalizados em outra maquina e nesse caso o segundo algoritimo se provou ligeiramente mais rapido).
 
 Também foram realizados testes com valores maiores variando de 4096x4096 a 10240x10240 elementos, com incrementos de 2048 em ambas as dimensões, somete na liguagem C++.
 
@@ -169,11 +169,14 @@ Também foram realizados testes com valores maiores variando de 4096x4096 a 1024
 
 Nesses testes podemos ver a real eficiencia do segundo algoritimo em C++ em relaçao ao primeiro, devido aos primeiros teste se mostrar com menor tempo que aos dois ultimos testes do primeiro algoritimo, e também em relação ao de Python, já que mesmo com numeros maiores o tempo de processamento se mostra inferior a varios testes realizados no algoritimo de Python.
 
+Nesses testes reforsamos mais uma vez a melhor eficiencia do algoritimo em C++ de multiplição linha x linha em relação ao algoritimo de multiplição linha x coluna.
+
 ### **3. MULTIPLICAÇÃO POR BLOCO**
 Nesta abordagem, utilizamos o conceito de multiplicação por blocos para otimizar o desempenho da multiplicação de matrizes. 
-Essa parte foi desenvolvida somente em C++
+Essa parte foi desenvolvida somente em C++.
 
 O algoritmo implementado em C++ funciona da seguinte maneira:
+
 O loop externo `for(ib)` percorre as linhas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das linhas. Dentro deste loop, há outro loop `for(jb)` que percorre as colunas da matriz resultante `phc` em blocos de tamanho `bkSize` na dimensão das colunas. Em seguida, há um terceiro loop `for(kb)` que percorre as linhas da matriz `pha` em blocos de tamanho `bkSize` na dimensão das linhas. Dentro desses três loops, há tres loops aninhados para calcular os elementos de cada bloco da matriz resultante `phc`. Esses loops percorrem as linhas (`for(i)`), as colunas (`for(j)`) e as linhas da matriz `pha` (`for(k)`) dentro dos blocos, limitados pelo tamanho do bloco e as dimensões das matrizes. Dentro do loop mais interno, o elemento `phc[i*m_ar+j]` é calculado como a soma acumulada dos produtos dos elementos correspondentes das linhas da matriz `pha` e das colunas da matriz `phb`.
 
 ~~~C++
@@ -212,18 +215,21 @@ Os testes foram realizados variando o tamanho do bloco (`bkSize`) (128, 256, 512
 |:-----------------:|:-----------------:|:-----------------:|:-----------------:|
 | 4096              | 89.187            | 91.182            | 375.748           |
 | 6144              | 305.734           | 300.610           | 314.221           |
-| 8192              | 723.451           | 3817.102          | x                 |
+| 8192              | 723.451           | 3817.102          | 3679.071 <sup>*2</sup>         |
 | 10240             | 1422.087          | 1407.182          | x                 |
 
+<sup>Observação *2: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente, e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento.</sup>
 
 Esses resultados demonstram que o desempenho varia significativamente com o tamanho do bloco e do tamanho da matriz. Observa-se um aumento no tempo de execução à medida que o tamanho do bloco aumenta para casos de valores menores, já em valores menores se observa geralmente uma leve queda de tempo execução com blocos menores (O pq disso sla tem que ver ai). 
 
-Ainda sim se formos comparar os resoltados com o segundo algoritimo em relaçao a tempo de execução a multiplicaçao em bloco se mostra menos eficiente. Porem ela poderia ser sim mais eficiete em relaçao ao primeiro algoritimo, para chegarmos a conclusoes mais concretas deveriam ser realizados testes como os valores de matriz nesse traste ultitizados no primeiro algoritimo
+Ainda sim se formos comparar os resoltados com o algotitimo de multipplicacao linha x linha em relaçao a tempo de execução a multiplicaçao em bloco se mostra menos eficiente. Porem ela poderia ser sim mais eficiete em relaçao ao algoritimo multipplicacao linha x coluna, para chegarmos a conclusoes mais concretas deveriam ser realizados mais testes.
 
-Em relação aos testes realizados apenas em C, os tempos de execução variam dependendo do tamanho do bloco e da matriz. Esses resultados podem fornecer insights úteis para a seleção dos parâmetros ideais de tamanho de bloco para otimização do desempenho do algoritmo de multiplicação de matrizes. Realmente precisa dessa parte????
+Outra coisa que foi observada dois testes com valores diferentes do esperado, porem ser formos observar os testes realizados sem a flag de otimização -O2 vamos ver que eles são similares, isso nos leva a suposição que os testes problematicos tiveram um erro nesse sentido.
 
 ## Performance evaluation of a multi-core implementation
-Na segunda parte deste projeto, será realizada uma avaliação de desempenho de implementações multi-core. Serão implementadas versões paralelas da multiplicação de matrizes, especificamente a implementação linha a linha. Duas soluções paralelas distintas serão propostas e analisadas em termos de MFlops, aceleração (speedup) e eficiência. O objetivo é comparar o desempenho das soluções paralelas em sistemas multi-core e avaliar sua eficácia em relação à implementação sequencial.
+Serão implementadas versões paralelas da multiplicação de matrizes, especificamente a implementação linha a linha. Duas soluções paralelas distintas serão propostas e analisadas em termos de MFlops, aceleração (speedup) e eficiência. 
+
+O objetivo é comparar o desempenho das soluções paralelas em sistemas multi-core e avaliar sua eficácia em relação à implementação sequencial.
 
 A diferença entre os dois algoritmos está na forma como as iterações são paralelizadas:
 
@@ -266,5 +272,25 @@ Neste segundo algoritmo, a diretiva `#pragma omp parallel` é usada para criar u
 
 Em resumo, enquanto o primeiro algoritmo paraleliza apenas o loop externo, distribuindo as iterações entre threads separadas, o segundo algoritmo paraleliza também o loop interno, permitindo que partes específicas do cálculo sejam executadas simultaneamente em diferentes threads. A escolha entre os dois depende das características específicas do problema e do hardware disponível.
 
-Fazer testess e achar coisas blaus. Fazemos em no mac sem a api e colocamos uma obs para o professor
+Foram realizados testes nos dois algoritimos onde o tempo de processamento é registrado para matrizes de entrada variando de 600x600 a 3000x3000 elementos, com incrementos de 400 em ambas as dimensões.
+
+| Tamanho da Matriz | Algoritimo 1 (segundos) | Algoritimo 2 (segundos) |
+|:------------------:|:---------------:|:-----------------:|
+| 4096               | 0.103           | 43.061            |
+| 6144               | 0.492           | 199.246           |
+| 8192               | 1.637           | 549.308           |
+| 10240              | 3.714           | 1148.476          |
+
+<sub>Observação: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente, e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento.</sup>
+
+Também coletamos as informações sobre os MFlops e o speedup dos algoritimos
+
+| Tamanho da Matriz | Algoritimo 1 (MFlops) | Algoritimo 1 (Speedup) | Algoritimo 2 (MFlops) | Algoritimo 2 (Speedup) |
+|:------------------:|:---------------:|:-----------------:|:---------------:|:-----------------:|
+| 4096               | 0.103           | 43.061            | 43.061            | 43.061            |
+| 6144               | 0.492           | 199.246           | 43.061            | 43.061            |
+| 8192               | 1.637           | 549.308           | 43.061            | 43.061            |
+| 10240              | 3.714           | 1148.476          | 43.061            | 43.061            |
+
+COm isso concluimos tals e baus
 
