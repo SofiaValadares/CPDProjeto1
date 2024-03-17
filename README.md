@@ -7,7 +7,7 @@ Isso será feito através de duas partes distintas: na primeira parte, será ana
 A Performance API (PAPI) será utilizada para coletar indicadores de desempenho relevantes.
 
 **Turma 13 - Grupo 11:** 
-1. Gabriel Machado Jr (email address)
+1. Gabriel Machado Jr (up202008860@fe.up.pt)
 2. Guilherme Araujo (up@202310879.up.pt)
 3. Sofia Valadares Cavalcanti (up202310878@up.pt)
 
@@ -16,7 +16,7 @@ A Performance API (PAPI) será utilizada para coletar indicadores de desempenho 
   <tr>
     <td align="center">
       <a href="https://github.com/gabrieltmjr">
-        <img src="https://avatars.githubusercontent.com/u/73040950?v=4" width="100px;" alt="Foto Matheus Gomes"/><br>
+        <img src="https://avatars.githubusercontent.com/u/73040950?v=4" width="100px;" alt="Foto Gabriel"/><br>
         <sub>
           <b>Gabriel Machado Jr</b>
         </sub>
@@ -24,7 +24,7 @@ A Performance API (PAPI) será utilizada para coletar indicadores de desempenho 
     </td>
     <td align="center">
       <a href="https://github.com/guiga-sa">
-        <img src="https://avatars.githubusercontent.com/u/123979639?v=4" width="100px;" alt="Foto Megas"/><br>
+        <img src="https://avatars.githubusercontent.com/u/123979639?v=4" width="100px;" alt="Foto Guilherme"/><br>
         <sub>
           <b>Guilherme Araujo</b>
         </sub>
@@ -101,7 +101,7 @@ Foram realizados testes onde o tempo de processamento é registrado para matrize
 | 3000               | 118.942         | 3502.117 <sup>*1</sup>      |
 
 
-<sup>Observação *1: Esse texte foi feito em uma maquina diferente, com um sistema operacional diferente, devido a indisponibilidade de tempo e maquinas no momento.</sup>
+<sup>Observação *1: Esse texte foi feito em uma maquina diferente, com um sistema operacional diferente (macOS), devido a indisponibilidade de tempo e maquinas no momento.</sup>
 
 Observa-se que o tempo de processamento aumenta conforme o tamanho da matriz, quando em valores maiores, mesmo que esse almento tenha o mesmo valor, o almento de tempo é maior. Além disso, é notável que a implementação em C++ é significativamente mais rápida do que a implementação em Python, e essa diferença de desempenho aumenta à medida que o tamanho da matriz aumenta. Essas análises fornecem insights valiosos sobre o desempenho relativo das duas linguagens na execução do mesmo algoritmo de multiplicação de matrizes.
 
@@ -154,7 +154,7 @@ Foram realizados testes onde o tempo de processamento é registrado para matrize
 | 2600               | 12.087          | 4070.254          |
 | 3000               | 17.878          | 3309.937 <sup>*1</sup> |
 
-<sup>Observação *1: Este teste foi realizado em uma máquina diferente, com um sistema operacional diferente, devido à indisponibilidade de tempo e máquinas no momento.</sup>
+<sup>Observação *1: Este teste foi realizado em uma máquina diferente, com um sistema operacional diferente (macOS), devido à indisponibilidade de tempo e máquinas no momento.</sup>
 
 Foi obserevado tudo aquilo que foi observado na versão do algoritimo de multiplição linha x coluna, mais também com a adiçao que o algoritimo em C++ se mostrou mais rapido e com menor almento de tempo conforme a matriz almentava, ao contrario dos testes em Python que se mostraram mais lentos em coparaçao a multiplicação linha x coluna (a exeçao do teste 3000 que ambos foram relalizados em outra maquina e nesse caso o segundo algoritimo se provou ligeiramente mais rapido).
 
@@ -215,10 +215,10 @@ Os testes foram realizados variando o tamanho do bloco (`bkSize`) (128, 256, 512
 |:-----------------:|:-----------------:|:-----------------:|:-----------------:|
 | 4096              | 89.187            | 91.182            | 375.748           |
 | 6144              | 305.734           | 300.610           | 314.221           |
-| 8192              | 723.451           | 3817.102          | 3679.071 <sup>*2</sup>         |
+| 8192              | 723.451           | 3817.102          | x <sup>*2</sup>         |
 | 10240             | 1422.087          | 1407.182          | x                 |
 
-<sup>Observação *2: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente, e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento.</sup>
+<sup>Observação *2: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente (macOS), e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento.</sup>
 
 Esses resultados demonstram que o desempenho varia significativamente com o tamanho do bloco e do tamanho da matriz. Observa-se um aumento no tempo de execução à medida que o tamanho do bloco aumenta para casos de valores menores, já em valores menores se observa geralmente uma leve queda de tempo execução com blocos menores (O pq disso sla tem que ver ai). 
 
@@ -274,23 +274,23 @@ Em resumo, enquanto o primeiro algoritmo paraleliza apenas o loop externo, distr
 
 Foram realizados testes nos dois algoritimos onde o tempo de processamento é registrado para matrizes de entrada variando de 600x600 a 3000x3000 elementos, com incrementos de 400 em ambas as dimensões.
 
-| Tamanho da Matriz | Algoritimo 1 (segundos) | Algoritimo 2 (segundos) |
-|:------------------:|:---------------:|:-----------------:|
-| 4096               | 0.103           | 43.061            |
-| 6144               | 0.492           | 199.246           |
-| 8192               | 1.637           | 549.308           |
-| 10240              | 3.714           | 1148.476          |
+| Tamanho da Matriz | Algoritimo 1 (segundos) | Algoritimo 2 (segundos) | Multipicação Linha X Linha |
+|:------------------:|:---------------:|:-----------------:|:-----------------:|
+| 4096               | 289.806         | x                 | 286.583           |
+| 6144               | 489.075         | x                 | x                 |
+| 8192               | x               | x                 | x                 |
+| 10240              | x               | x                 | x                 |
 
-<sub>Observação: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente, e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento.</sup>
+<sub>Observação: Estes testes foram realizados em uma máquina diferente, com um sistema operacional diferente (macOS), e sem a flag de otimização -O2 devido à indisponibilidade de tempo e máquinas no momento. Por isso mesmo que também refizemos os testes da multiplicação linha x linha sem paramerilização sem a flag, para assim ser possivel comprarar os testes de maneira mais fidedigna.</sup>
 
 Também coletamos as informações sobre os MFlops e o speedup dos algoritimos
 
 | Tamanho da Matriz | Algoritimo 1 (MFlops) | Algoritimo 1 (Speedup) | Algoritimo 2 (MFlops) | Algoritimo 2 (Speedup) |
 |:------------------:|:---------------:|:-----------------:|:---------------:|:-----------------:|
-| 4096               | 0.103           | 43.061            | 43.061            | 43.061            |
-| 6144               | 0.492           | 199.246           | 43.061            | 43.061            |
-| 8192               | 1.637           | 549.308           | 43.061            | 43.061            |
-| 10240              | 3.714           | 1148.476          | 43.061            | 43.061            |
+| 4096               | 0               | 0.98888           | 43.061            | 0.98147           |
+| 6144               | 0               | 0.995958          | 43.061            | 0.981473          |
+| 8192               | 1.637           | 0.981473          | 43.061            | 0.981473          |
+| 10240              | 3.714           | 0.981473          | 43.061            | 43.061            |
 
 COm isso concluimos tals e baus
 
